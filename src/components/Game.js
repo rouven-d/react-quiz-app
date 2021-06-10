@@ -37,6 +37,11 @@ export default class Game extends Component {
     }
   }
 
+  //This function handles the push back to the home page once a user has saved his/her score
+  scoreSaved = () => {
+    this.props.history.push("/");
+  };
+
   changeQuestion = (bonus = 0) => {
     //Defining the state of done to true when no questions are left in the question array!
     //Makes sure the bonus is added for the last question in the array!
@@ -88,7 +93,7 @@ export default class Game extends Component {
             />
           </div>
         )}
-        {done && <SaveScoreForm score={score} />}
+        {done && <SaveScoreForm score={score} scoreSaved={this.scoreSaved} />}
       </>
     );
   }

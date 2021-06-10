@@ -1,10 +1,12 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import { useFirebase } from "./Firebase/FirebaseContext";
 
 //Defining the Form that gets displayed after a user is done with the quiz
 //Aks for signup if the user wants to save his/her highscore
-export default function SaveScoreForm({ score }) {
+export default function SaveScoreForm({ score, scoreSaved }) {
   const [username, setUsername] = useState("");
+  const firebase = useFirebase();
 
   //handles the username from the input field below and updates it with the users value
   const onUsernameChange = (event) => {
@@ -19,7 +21,11 @@ export default function SaveScoreForm({ score }) {
       name: username,
       score,
     };
-    console.log(record);
+    //Firebase database operation to save the record defined above into a firebase collection called scores!
+    //This is setup in the ./Firebase/Firebase.js line 19!
+    firebase.scores().push(record, () => {
+      scoreSaved();
+    });
   };
 
   return (
