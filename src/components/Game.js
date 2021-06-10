@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import Question from "./Question";
 import { loadQuestions } from "../helpers/QuestionsHelper";
+import HUD from "./HUD";
+import SaveScoreForm from "./SaveScoreForm";
 
 export default class Game extends Component {
   //Defining the state for the questions
@@ -11,6 +13,8 @@ export default class Game extends Component {
       currentQuestion: null,
       loading: true,
       score: 0,
+      questionNumber: 0,
+      done: false,
     };
   }
 
@@ -34,6 +38,11 @@ export default class Game extends Component {
   }
 
   changeQuestion = (bonus = 0) => {
+    //Defining the state of done to true when no questions are left in the question array!
+    if (this.state.questions.length === 0) {
+      return this.setState({ done: true });
+    }
+
     //get a random index of a question
     const randomQuestionIndex = Math.floor(
       Math.random() * this.state.questions.length
@@ -50,8 +59,8 @@ export default class Game extends Component {
       currentQuestion,
       loading: false,
       score: (prevState.score += bonus),
+      questionNumber: prevState.questionNumber + 1,
     }));
-    console.log(this.state.score);
   };
 
   //Here we use the && operator to only render the Question component with
@@ -62,15 +71,23 @@ export default class Game extends Component {
   render() {
     return (
       <>
-        {this.state.loading && <div id="loader" />}
-        {!this.state.loading && this.state.currentQuestion && (
-          <Question
-            question={this.state.currentQuestion}
-            changeQuestion={this.changeQuestion}
-          />
+        {this.state.loading && !this.state.done && <div id="loader" />}
+
+        {!this.state.done && !this.state.loading && this.state.currentQuestion && (
+          <div>
+            <HUD
+              score={this.state.score}
+              questionNumber={this.state.questionNumber}
+            />
+            <Question
+              question={this.state.currentQuestion}
+              changeQuestion={this.changeQuestion}
+            />
+          </div>
         )}
+        {this.state.done && <SaveScoreForm score={this.state.score} />}
       </>
     );
   }
 }
-//Displays the loading icon div only while loading=true, else, if false, renders the question!
+//Displays the loading icon div only while loading=true, else, if false, renders the question! And only while we are not done!
