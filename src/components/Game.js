@@ -39,8 +39,12 @@ export default class Game extends Component {
 
   changeQuestion = (bonus = 0) => {
     //Defining the state of done to true when no questions are left in the question array!
+    //Makes sure the bonus is added for the last question in the array!
     if (this.state.questions.length === 0) {
-      return this.setState({ done: true });
+      this.setState((prevState) => ({
+        done: true,
+        score: prevState.score + bonus,
+      }));
     }
 
     //get a random index of a question
@@ -69,23 +73,22 @@ export default class Game extends Component {
   //Meaning only if the Fetch API was successfull and
   //updated the state!
   render() {
+    const { loading, done, score, currentQuestion, questionNumber } =
+      this.state;
     return (
       <>
-        {this.state.loading && !this.state.done && <div id="loader" />}
+        {loading && !done && <div id="loader" />}
 
-        {!this.state.done && !this.state.loading && this.state.currentQuestion && (
+        {!done && !loading && currentQuestion && (
           <div>
-            <HUD
-              score={this.state.score}
-              questionNumber={this.state.questionNumber}
-            />
+            <HUD score={score} questionNumber={questionNumber} />
             <Question
-              question={this.state.currentQuestion}
+              question={currentQuestion}
               changeQuestion={this.changeQuestion}
             />
           </div>
         )}
-        {this.state.done && <SaveScoreForm score={this.state.score} />}
+        {done && <SaveScoreForm score={score} />}
       </>
     );
   }
