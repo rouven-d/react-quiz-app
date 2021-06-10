@@ -48,7 +48,7 @@ export default class Game extends Component {
     if (this.state.questions.length === 0) {
       this.setState((prevState) => ({
         done: true,
-        score: prevState.score + bonus,
+        // score: prevState.score + bonus,
       }));
     }
 
