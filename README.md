@@ -2,6 +2,8 @@
 
 Quiz App built with React using the Open Trivia API and Firebase as a backend database.
 
+- Hosted on: [Netlify](https://quiz-app-react2.netlify.app/)
+
 ## Table of contents
 
 - [Overview](#overview)
