@@ -192,7 +192,34 @@ input::placeholder {
   margin-bottom: 4rem;
 }
 
+.scorer-name {
+  padding: 1.5rem 2.5rem;
+  background-color: #56a5eb;
+  color: white;
+  width: 80%;
+  text-align: left;
+}
+
 .high-score {
-  font-size: 2.8rem;
-  margin-bottom: 0.5rem;
+  padding: 1.5rem;
+  width: 50%;
+}
+
+.hsbtn {
+  font-size: 1.8rem;
+  padding: 1rem 0;
+  width: 20rem;
+  text-align: center;
+  border: 0.1rem solid #56a5eb;
+  margin: 3rem auto 1rem auto;
+  text-decoration: none;
+  color: #56a5eb;
+  background-color: white;
+}
+
+.hsbtn:hover {
+  cursor: pointer;
+  box-shadow: 0 0.4rem 1.4rem 0 rgba(86, 185, 235, 0.5);
+  transform: translateY(-0.1rem);
+  transition: transform 150ms;
 }
