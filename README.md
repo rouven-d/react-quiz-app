@@ -11,15 +11,15 @@ Quiz App built with React using the Open Trivia API and Firebase as a backend da
   - [Built with](#built-with)
 - [Author](#author)
 
-##Overview
+## Overview
 
 A quiz app built with React, using Firebase's real time database on the backend and pulling in questions from the Open Trivia API.
 
-###The challenge
+### The challenge
 
 The app currently allows the user to start a quiz game displaying 10 questions one after another. Users progress and score is shown, with 10 points given for each right answer. After the game finishes, the user has the option to save his/hers score. The best 10 scores get displayed under the High Scores page.
 
-###Built with
+### Built with
 
 - React
 - Firebase
